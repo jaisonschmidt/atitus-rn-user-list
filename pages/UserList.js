@@ -1,6 +1,8 @@
+import { Text } from "react-native";
+
 function UserList() {
     return (
-        <div>Lista de usuários</div>
+        <Text>Lista de usuários</Text>
     )
 }
 
