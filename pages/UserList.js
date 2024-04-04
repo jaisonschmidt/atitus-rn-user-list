@@ -1,8 +1,11 @@
-import { Text } from "react-native";
+import { Text, Button } from "react-native";
 
-function UserList() {
+function UserList({ navigation }) {
     return (
-        <Text>Lista de usuários</Text>
+        <>
+            <Text>Lista de usuários</Text>
+            <Button title="Ver detalhes" onPress={() => navigation.navigate("UserDetail")} />
+        </>
     )
 }
 
