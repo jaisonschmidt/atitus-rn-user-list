@@ -1,33 +1,18 @@
-import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Button, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import UserList from './pages/UserList';
 import UserDetail from './pages/UserDetail';
 
-export default function App() {
-  const [view, setView] = useState('list'); // list ou detail
-  
+const Stack = createNativeStackNavigator();
+
+export default function App() {  
   return (
-    <View style={styles.container}>
-      {view === 'list' && <UserList />}
-
-      {view === 'detail' && <UserDetail />}
-
-      <Button title="Clique aqui" 
-        onPress={() => view === 'list' ? setView('detail') : setView('list')} 
-      />
-
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="UserList">
+        <Stack.Screen name="UserList" component={UserList} />
+        <Stack.Screen name="UserDetail" component={UserDetail} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
