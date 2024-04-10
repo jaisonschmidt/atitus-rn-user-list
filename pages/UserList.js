@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { Text, View, Button } from "react-native";
 
 function UserList({ navigation }) {
     // criar um estado local para armazenar os usuários
@@ -9,7 +9,7 @@ function UserList({ navigation }) {
     // quando carregar este componente (onLoad), acessar o endpoint (API) https://randomuser.me/api/?results=20 usando Axios
     // e trazer os dados dos usuários para a aplicação, vamos gravar em uma variável
     useEffect(() => {
-        axios.get("https://randomuser.me/api/?results=20")
+        axios.get("https://randomuser.me/api/?results=20&nat=br")
             .then((response) => {
                 console.log(response.data.results);
                 setUsers(response.data.results);
@@ -25,9 +25,15 @@ function UserList({ navigation }) {
         <>
             {users.length === 0 && <Text>Carregando usuários...</Text>}
             
-            {users.length > 0 && users.map((user, index) => (
-                <Text key={index}>{user.name.first} {user.name.last}</Text>
-            ))}
+            <View style={{padding: 20}}>
+                {users.map((user, index) => (
+                    <Button 
+                        key={index} 
+                        title={`${user.name.first} ${user.name.last}`} 
+                        onPress={() => navigation.navigate("UserDetail", { user })}
+                    />
+                ))}
+            </View>
         </>
     )
 }

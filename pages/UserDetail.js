@@ -1,8 +1,10 @@
 import { Text } from "react-native";
 
-function UserDetail() {
+function UserDetail({ route }) {
+  const { user } = route.params;
+
   return (
-    <Text>User detail</Text>
+    <Text>{user.name.first}</Text>
   );
 }
 
