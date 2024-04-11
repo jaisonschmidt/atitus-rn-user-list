@@ -32,7 +32,14 @@ function UserList({ navigation }) {
                         {users.map((user, index) => (
                             <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate("UserDetail", { user })}>
                                 <View 
-                                    style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}
+                                    style={{
+                                        flexDirection: 'row', 
+                                        alignItems: 'center', 
+                                        marginBottom: 10, 
+                                        borderBottomWidth: 1, 
+                                        borderBottomColor: '#ccc', 
+                                        paddingBottom: 10
+                                    }}
                                 >
                                     <Image
                                         style={{width: 30, height: 30, marginRight:15}}
