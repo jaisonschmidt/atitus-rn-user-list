@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, ScrollView, Image, TouchableWithoutFeedback } from "react-native";
+import { Card } from '@rneui/themed';
 
 function UserList({ navigation }) {
     // criar um estado local para armazenar os usuários
@@ -25,15 +26,26 @@ function UserList({ navigation }) {
         <>
             {users.length === 0 && <Text>Carregando usuários...</Text>}
             
-            <View style={{padding: 20}}>
-                {users.map((user, index) => (
-                    <Button 
-                        key={index} 
-                        title={`${user.name.first} ${user.name.last}`} 
-                        onPress={() => navigation.navigate("UserDetail", { user })}
-                    />
-                ))}
-            </View>
+            <ScrollView>
+                <View style={{padding: 20}}>
+                    <Card>
+                        {users.map((user, index) => (
+                            <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate("UserDetail", { user })}>
+                                <View 
+                                    style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}
+                                >
+                                    <Image
+                                        style={{width: 30, height: 30, marginRight:15}}
+                                        source={{uri: user.picture.thumbnail}}
+                                    />
+
+                                    <Text>{user.name.first} {user.name.last}</Text>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        ))}
+                    </Card>
+                </View>
+            </ScrollView>
         </>
     )
 }
@@ -41,3 +53,11 @@ function UserList({ navigation }) {
 export default UserList;
 
 // <Button title="Ver detalhes" onPress={() => navigation.navigate("UserDetail")} />
+
+/**
+ * <Button 
+        key={index} 
+        title={`${user.name.first} ${user.name.last}`} 
+        onPress={() => navigation.navigate("UserDetail", { user })}
+    />
+ */
